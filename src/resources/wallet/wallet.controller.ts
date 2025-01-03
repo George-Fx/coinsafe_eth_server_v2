@@ -20,6 +20,10 @@ export class WalletController {
       throw new BadRequestException('Allowed only POST request');
     }
 
+    if (!entropy) {
+      throw new BadRequestException('Entropy must be provided');
+    }
+
     return this.walletService.createWallet();
   }
 }
