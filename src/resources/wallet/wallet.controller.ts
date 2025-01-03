@@ -26,4 +26,18 @@ export class WalletController {
 
     return this.walletService.createWallet(entropy);
   }
+
+  @All('recover')
+  @HttpCode(HttpStatus.OK)
+  recoverWallet(@Req() request: Request, @Body('mnemonic') mnemonic: string) {
+    if (request.method !== 'POST') {
+      throw new BadRequestException('Allowed only POST request');
+    }
+
+    if (!mnemonic) {
+      throw new BadRequestException('Mnemonic must be provided');
+    }
+
+    return this.walletService.recoverWallet(mnemonic);
+  }
 }

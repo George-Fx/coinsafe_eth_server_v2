@@ -18,4 +18,18 @@ export class WalletService {
       console.error('Error creating wallet:', error);
     }
   }
+
+  async recoverWallet(mnemonic: string) {
+    try {
+      const wallet = ethers.Wallet.fromPhrase(mnemonic);
+      return {
+        address: wallet.address,
+        privateKey: wallet.privateKey,
+        mnemonic: mnemonic,
+      };
+    } catch (error) {
+      console.error('Error recovering wallet:', error);
+      throw new Error('Failed to recover wallet');
+    }
+  }
 }
