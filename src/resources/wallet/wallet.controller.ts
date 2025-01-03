@@ -4,6 +4,7 @@ import {
   Controller,
   All,
   Req,
+  Body,
   HttpCode,
   HttpStatus,
   BadRequestException,
@@ -15,11 +16,15 @@ export class WalletController {
 
   @All('create')
   @HttpCode(HttpStatus.CREATED)
-  createWallet(@Req() request: Request) {
-    if (request.method !== 'GET') {
+  createWallet(@Req() request: Request, @Body('entropy') entropy: number) {
+    if (request.method !== 'POST') {
       throw new BadRequestException('Allowed only POST request');
     }
 
-    return this.walletService.createWallet();
+    if (!entropy) {
+      throw new BadRequestException('Entropy must be provided');
+    }
+
+    return this.walletService.createWallet(entropy);
   }
 }
