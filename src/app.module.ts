@@ -8,6 +8,7 @@ import {EthereumModule} from './resources/ethereum/ethereum.module';
 import {PricesModule} from './resources/prices/prices.module';
 import { MarketModule } from './resources/market/market.module';
 import { TransferModule } from './resources/transfer/transfer.module';
+import { TransactionsModule } from './resources/transactions/transactions.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TransferModule } from './resources/transfer/transfer.module';
     PricesModule,
     MarketModule,
     TransferModule,
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
