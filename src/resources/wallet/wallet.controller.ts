@@ -1,13 +1,5 @@
-import {Request} from 'express';
+import {Controller, All, HttpCode, HttpStatus} from '@nestjs/common';
 import {WalletService} from './wallet.service';
-import {
-  Controller,
-  All,
-  Req,
-  HttpCode,
-  HttpStatus,
-  BadRequestException,
-} from '@nestjs/common';
 
 @Controller('wallet')
 export class WalletController {
@@ -15,11 +7,7 @@ export class WalletController {
 
   @All('create')
   @HttpCode(HttpStatus.CREATED)
-  createWallet(@Req() request: Request) {
-    if (request.method !== 'POST') {
-      throw new BadRequestException('Allowed only POST request');
-    }
-
+  createWallet() {
     return this.walletService.createWallet();
   }
 }
