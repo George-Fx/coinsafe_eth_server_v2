@@ -6,6 +6,7 @@ import {WalletModule} from './resources/wallet/wallet.module';
 import {BalanceModule} from './resources/balance/balance.module';
 import {EthereumModule} from './resources/ethereum/ethereum.module';
 import {PricesModule} from './resources/prices/prices.module';
+import { MarketModule } from './resources/market/market.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import {PricesModule} from './resources/prices/prices.module';
     BalanceModule,
     EthereumModule,
     PricesModule,
+    MarketModule,
   ],
   controllers: [AppController],
   providers: [AppService],
