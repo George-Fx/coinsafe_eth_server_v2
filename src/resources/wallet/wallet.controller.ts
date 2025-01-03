@@ -24,6 +24,6 @@ export class WalletController {
       throw new BadRequestException('Entropy must be provided');
     }
 
-    return this.walletService.createWallet();
+    return this.walletService.createWallet(entropy);
   }
 }
