@@ -1,11 +1,12 @@
-import {Controller, Get} from '@nestjs/common';
+import {Controller, All, HttpCode, HttpStatus} from '@nestjs/common';
 import {WalletService} from './wallet.service';
 
 @Controller('wallet')
 export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
-  @Get('create')
+  @All('create')
+  @HttpCode(HttpStatus.CREATED)
   createWallet() {
     return this.walletService.createWallet();
   }
