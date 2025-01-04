@@ -19,7 +19,7 @@ export class TransferController {
   @HttpCode(HttpStatus.OK)
   async send(
     @Req() request: Request,
-    @Body('from') from: string,
+    @Body('fromPrivateKey') fromPrivateKey: string,
     @Body('to') to: string,
     @Body('amount') amount: number,
   ) {
@@ -29,8 +29,8 @@ export class TransferController {
       );
     }
 
-    if (!from || !ethers.isAddress(from)) {
-      throw new BadRequestException('Invalid or missing "from" address');
+    if (!fromPrivateKey) {
+      throw new BadRequestException('Invalid or missing "fromPrivateKey"');
     }
 
     if (!to || !ethers.isAddress(to)) {
@@ -41,6 +41,6 @@ export class TransferController {
       throw new BadRequestException('Invalid or missing "amount"');
     }
 
-    return this.transferService.transfer(from, to, amount);
+    return this.transferService.transfer(fromPrivateKey, to, amount);
   }
 }
