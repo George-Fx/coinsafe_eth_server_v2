@@ -13,11 +13,7 @@ export class TransferService {
     this.provider = createProvider(this.configService);
   }
 
-  async transfer(
-    fromPrivateKey: string,
-    to: string,
-    amount: number,
-  ): Promise<{success: boolean}> {
+  async transfer(fromPrivateKey: string, to: string, amount: number) {
     try {
       const wallet = new ethers.Wallet(fromPrivateKey, this.provider);
       const contract = new ethers.Contract(to, erc20Abi, wallet);
@@ -28,7 +24,7 @@ export class TransferService {
       const tx = await contract.transfer(to, amountInUnits);
       await tx.wait();
 
-      return {success: true};
+      return {hash: tx.hash};
     } catch (error) {
       console.error('Error sending tokens:', error);
       throw new Error(`Failed to send tokens: ${error.message}`);
